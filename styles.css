@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,300;1,500&display=swap');
+* { 
+    font-family: 'Roboto', sans-serif;
+}
+
+
+body {
+    background-image: url(bgweb.png);
+    
+}
+
+.kaasje {
+    font-size: 50px; 
+    color: #FCA311; 
+    text-align: center;
+    
+}
+
+.kaasje2 {
+    font-size: 30px; 
+    color: #FCA311;
+    text-align: center;
+    padding-top: 5em;
+}
+
+.kaasje3 {
+    padding-top: 5rem; 
+    text-align: center; 
+    font-size: 40px; 
+    color: #FCA311;
+}
+
+.HoGentIMG {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5em;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    background-color: #FCA311;
+    width: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+}
+
+a:hover {
+    background-color: #E5E5E5;
+}
