@@ -6,18 +6,19 @@
 
 body {
     background-image: url(bgweb.png);
+    background-size: cover;
     
 }
 
 .kaasje {
-    font-size: 50px; 
+    font-size: 4em; 
     color: #FCA311; 
     text-align: center;
     
 }
 
 .kaasje2 {
-    font-size: 30px; 
+    font-size: 1.5em; 
     color: #FCA311;
     text-align: center;
     padding-top: 5em;
@@ -26,7 +27,7 @@ body {
 .kaasje3 {
     padding-top: 5rem; 
     text-align: center; 
-    font-size: 40px; 
+    font-size: 4em; 
     color: #FCA311;
 }
 
@@ -42,7 +43,7 @@ a {
     color: black;
     display: block;
     background-color: #FCA311;
-    width: 5%;
+    width: 3em;
     margin-left: auto;
     margin-right: auto;
     margin-top: 2em;
