@@ -18,52 +18,55 @@
 
   .main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:5.5rem 1.5rem 3rem;position:relative;overflow:hidden}
   .grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(232,197,71,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(232,197,71,.04) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 80% 60% at 50% 20%,black 5%,transparent 70%);pointer-events:none}
-
-  .inner{position:relative;z-index:1;width:100%;max-width:520px}
+  .inner{position:relative;z-index:1;width:100%;max-width:540px}
 
   .page-eyebrow{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(232,197,71,.25);padding:.25rem .9rem;border-radius:99px;display:inline-block;margin-bottom:1.2rem}
   .page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,9vw,5.5rem);line-height:.9;letter-spacing:.04em;margin-bottom:2rem}
   .page-title span{color:var(--gold)}
 
-  /* FORM CARD */
-  .form-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:1.5rem}
-  .form-card-header{padding:1rem 1.4rem;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.6rem}
-  .form-card-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.08em;color:var(--text)}
-  .form-card-body{padding:1.4rem}
-
-  .field{margin-bottom:1.2rem}
+  .form-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:1rem}
+  .form-card-header{padding:.9rem 1.4rem;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.6rem}
+  .form-card-title{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.08em}
+  .form-card-body{padding:1.2rem 1.4rem}
+  .field{margin-bottom:1.1rem}
   .field:last-child{margin-bottom:0}
-  .field-label{font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;display:block}
+  .field-label{font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;display:block}
 
-  /* Player selector */
-  .player-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:.4rem}
-  .player-btn{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:.45rem .6rem;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:500;color:var(--muted);cursor:pointer;text-align:center;transition:all .15s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  /* Player grid */
+  .player-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:.35rem}
+  .player-btn{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:.4rem .5rem;font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:500;color:var(--muted);cursor:pointer;text-align:center;transition:all .15s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .player-btn:hover{border-color:rgba(232,197,71,.4);color:var(--text)}
   .player-btn.selected{background:rgba(232,197,71,.1);border-color:var(--gold);color:var(--gold)}
 
-  /* Points buttons */
-  .pts-row{display:flex;gap:.5rem;flex-wrap:wrap}
-  .pts-btn{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:.5rem 0;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.06em;color:var(--muted);cursor:pointer;transition:all .15s;flex:1;min-width:48px;text-align:center}
+  /* Discipline */
+  .disc-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+  .disc-btn{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.8rem;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;color:var(--muted);cursor:pointer;text-align:center;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:.3rem}
+  .disc-btn .disc-icon{font-size:1.6rem;line-height:1}
+  .disc-btn:hover{border-color:rgba(232,197,71,.4);color:var(--text)}
+  .disc-btn.selected{background:rgba(232,197,71,.1);border-color:var(--gold);color:var(--gold)}
+
+  /* Points */
+  .pts-row{display:flex;gap:.4rem;flex-wrap:wrap}
+  .pts-btn{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:.5rem 0;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.06em;color:var(--muted);cursor:pointer;transition:all .15s;flex:1;min-width:44px;text-align:center}
   .pts-btn:hover{border-color:rgba(232,197,71,.4);color:var(--text)}
   .pts-btn.selected{background:rgba(232,197,71,.1);border-color:var(--gold);color:var(--gold)}
-
-  /* Custom points */
-  .custom-pts-wrap{display:flex;align-items:center;gap:.5rem;margin-top:.6rem}
-  .custom-pts-input{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:.5rem .8rem;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:500;color:var(--text);outline:none;width:90px;text-align:center;transition:border-color .2s}
-  .custom-pts-input:focus{border-color:rgba(232,197,71,.5)}
-  .custom-pts-label{font-size:.78rem;color:var(--muted)}
-
-  /* Reason */
-  .reason-row{display:flex;gap:.4rem;flex-wrap:wrap}
-  .reason-btn{background:var(--surface);border:1px solid var(--border);border-radius:99px;padding:.3rem .85rem;font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:500;color:var(--muted);cursor:pointer;transition:all .15s}
-  .reason-btn:hover{border-color:var(--muted);color:var(--text)}
-  .reason-btn.selected{background:rgba(232,197,71,.08);border-color:rgba(232,197,71,.4);color:var(--gold)}
+  .custom-row{display:flex;align-items:center;gap:.6rem;margin-top:.5rem}
+  .custom-input{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:.5rem .8rem;font-family:'DM Sans',sans-serif;font-size:.95rem;color:var(--text);outline:none;width:80px;text-align:center;transition:border-color .2s}
+  .custom-input:focus{border-color:rgba(232,197,71,.5)}
+  .custom-lbl{font-size:.78rem;color:var(--muted)}
 
   /* Submit */
-  .submit-row{display:flex;gap:.8rem;align-items:center;margin-top:1.8rem}
-  .btn-submit{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.12em;background:var(--gold);color:#000;border:none;padding:.75rem 2rem;border-radius:4px;cursor:pointer;transition:transform .15s,opacity .15s;flex:1}
+  .btn-submit{width:100%;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.12em;background:var(--gold);color:#000;border:none;padding:.85rem;border-radius:6px;cursor:pointer;transition:transform .15s,opacity .15s;margin-top:1.2rem}
   .btn-submit:hover:not(:disabled){opacity:.88;transform:translateY(-1px)}
-  .btn-submit:disabled{opacity:.35;cursor:default;transform:none}
+  .btn-submit:disabled{opacity:.3;cursor:default;transform:none}
+
+  /* Summary bar */
+  .summary{display:flex;align-items:center;gap:.6rem;padding:.8rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;margin-top:1rem;font-size:.85rem;min-height:44px}
+  .summary-empty{color:var(--dim);font-size:.82rem}
+  .summary-player{font-weight:600;color:var(--text)}
+  .summary-sep{color:var(--dim)}
+  .summary-disc{color:var(--muted)}
+  .summary-pts{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--gold);margin-left:auto}
 
   /* Toast */
   .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.8rem 1.4rem;font-size:.88rem;font-weight:500;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;z-index:999;white-space:nowrap}
@@ -71,16 +74,16 @@
   .toast.success{border-color:var(--green);color:var(--green)}
   .toast.error{border-color:var(--red);color:var(--red)}
 
-  /* Recent log */
-  .log-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden}
-  .log-header{padding:.8rem 1.4rem;background:var(--surface);border-bottom:1px solid var(--border);font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.08em;color:var(--muted)}
-  .log-empty{padding:1.2rem 1.4rem;font-size:.82rem;color:var(--dim)}
-  .log-row{display:flex;align-items:center;gap:.8rem;padding:.7rem 1.4rem;border-bottom:1px solid var(--border);font-size:.82rem}
+  /* Log */
+  .log-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:1.5rem}
+  .log-hdr{padding:.75rem 1.2rem;background:var(--surface);border-bottom:1px solid var(--border);font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.08em;color:var(--muted)}
+  .log-empty{padding:1rem 1.2rem;font-size:.8rem;color:var(--dim)}
+  .log-row{display:flex;align-items:center;gap:.7rem;padding:.6rem 1.2rem;border-bottom:1px solid var(--border);font-size:.8rem}
   .log-row:last-child{border-bottom:none}
-  .log-pts{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--green);min-width:3rem}
+  .log-pts{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--green);min-width:2.5rem}
   .log-name{font-weight:500;flex:1}
-  .log-reason{color:var(--muted);font-size:.75rem}
-  .log-time{color:var(--dim);font-size:.72rem;min-width:3rem;text-align:right}
+  .log-disc{font-size:.7rem;color:var(--muted);background:var(--surface);border:1px solid var(--border);padding:1px 6px;border-radius:3px}
+  .log-time{color:var(--dim);font-size:.7rem;min-width:2.8rem;text-align:right}
 
   footer{text-align:center;padding:1.5rem 2rem;border-top:1px solid var(--border);color:var(--dim);font-size:.75rem;letter-spacing:.05em}
   @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
@@ -105,25 +108,36 @@
     <div class="page-eyebrow">Fina Special · Admin</div>
     <div class="page-title">Punten<br><span>toevoegen</span></div>
 
+    <!-- Step 1: Player -->
     <div class="form-card" style="animation:fadeUp .4s ease both">
-      <div class="form-card-header">
-        <span>👤</span>
-        <div class="form-card-title">Selecteer speler</div>
-      </div>
+      <div class="form-card-header"><span>👤</span><div class="form-card-title">1 · Speler</div></div>
       <div class="form-card-body">
         <div class="player-grid" id="player-grid"></div>
       </div>
     </div>
 
-    <div class="form-card" style="animation:fadeUp .4s .08s ease both">
-      <div class="form-card-header">
-        <span>🎯</span>
-        <div class="form-card-title">Punten</div>
+    <!-- Step 2: Discipline -->
+    <div class="form-card" style="animation:fadeUp .4s .06s ease both">
+      <div class="form-card-header"><span>🏆</span><div class="form-card-title">2 · Discipline</div></div>
+      <div class="form-card-body">
+        <div class="disc-row">
+          <button class="disc-btn" data-disc="Darts">
+            <span class="disc-icon">🎯</span>Darts
+          </button>
+          <button class="disc-btn" data-disc="Biljart">
+            <span class="disc-icon">🎱</span>Biljart
+          </button>
+        </div>
       </div>
+    </div>
+
+    <!-- Step 3: Points -->
+    <div class="form-card" style="animation:fadeUp .4s .12s ease both">
+      <div class="form-card-header"><span>🔢</span><div class="form-card-title">3 · Punten</div></div>
       <div class="form-card-body">
         <div class="field">
           <label class="field-label">Snelkeuze</label>
-          <div class="pts-row" id="pts-row">
+          <div class="pts-row">
             <button class="pts-btn" data-pts="1">+1</button>
             <button class="pts-btn" data-pts="2">+2</button>
             <button class="pts-btn" data-pts="3">+3</button>
@@ -133,30 +147,25 @@
         </div>
         <div class="field">
           <label class="field-label">Aangepast</label>
-          <div class="custom-pts-wrap">
-            <input class="custom-pts-input" id="custom-pts" type="number" min="0.5" max="100" step="0.5" placeholder="0"/>
-            <span class="custom-pts-label">punten (kan ook 0.5, 1.5 ...)</span>
-          </div>
-        </div>
-        <div class="field">
-          <label class="field-label">Reden</label>
-          <div class="reason-row" id="reason-row">
-            <button class="reason-btn" data-r="🎯 Darts gewonnen">🎯 Darts</button>
-            <button class="reason-btn" data-r="🎱 Biljart gewonnen">🎱 Biljart</button>
-            <button class="reason-btn" data-r="🏆 Finale">🏆 Finale</button>
-            <button class="reason-btn" data-r="⭐ Bonus">⭐ Bonus</button>
-            <button class="reason-btn" data-r="🎉 Andere">🎉 Andere</button>
+          <div class="custom-row">
+            <input class="custom-input" id="custom-pts" type="number" min="0.5" max="100" step="0.5" placeholder="0"/>
+            <span class="custom-lbl">punten (bv. 0.5, 2.5 …)</span>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="submit-row" style="animation:fadeUp .4s .16s ease both">
-      <button class="btn-submit" id="btn-submit" disabled>GEEF PUNTEN</button>
+    <!-- Summary + submit -->
+    <div style="animation:fadeUp .4s .18s ease both">
+      <div class="summary" id="summary">
+        <span class="summary-empty">Selecteer een speler, discipline en punten…</span>
+      </div>
+      <button class="btn-submit" id="btn-submit" disabled>BEVESTIG</button>
     </div>
 
-    <div class="log-card" style="margin-top:2rem;animation:fadeUp .4s .22s ease both">
-      <div class="log-header">Recente acties</div>
+    <!-- Log -->
+    <div class="log-card" style="animation:fadeUp .4s .24s ease both">
+      <div class="log-hdr">Recente acties</div>
       <div id="action-log"><div class="log-empty">Nog geen acties deze sessie.</div></div>
     </div>
 
@@ -164,8 +173,7 @@
 </div>
 
 <div class="toast" id="toast"></div>
-
-<footer>Fina Special &nbsp;·&nbsp; Admin &nbsp;·&nbsp; Punten beheer</footer>
+<footer>Fina Special &nbsp;·&nbsp; Admin &nbsp;·&nbsp; Puntenbeheer</footer>
 
 <script>
 var AT_BASE='appcZ6eL9mrvzI7d1';
@@ -176,113 +184,122 @@ var PLAYERS=["Lander","Ben","Tim","Celestine","Vic","Sam","Maure","Stef","Jooder
   "Brecht","Dauwe","Femke","Florian","Floris","Lauren","Senne","Laurens","Lucas",
   "Dominique","Sven","Anse","Schele-Nele"];
 
-var selectedPlayer=null, selectedPts=null, selectedReason=null;
+var sel={player:null,disc:null,pts:null};
 var actionLog=[];
 
-// Build player grid
-var grid=document.getElementById('player-grid');
+// Build player buttons
+var pg=document.getElementById('player-grid');
 PLAYERS.forEach(function(name){
-  var btn=document.createElement('button');
-  btn.className='player-btn';
-  btn.textContent=name;
-  btn.addEventListener('click',function(){
-    document.querySelectorAll('.player-btn').forEach(function(b){b.classList.remove('selected')});
-    btn.classList.add('selected');
-    selectedPlayer=name;
-    checkReady();
+  var b=document.createElement('button');
+  b.className='player-btn'; b.textContent=name;
+  b.addEventListener('click',function(){
+    pg.querySelectorAll('.player-btn').forEach(function(x){x.classList.remove('selected')});
+    b.classList.add('selected'); sel.player=name; update();
   });
-  grid.appendChild(btn);
+  pg.appendChild(b);
 });
 
-// Points quick-select
-document.querySelectorAll('.pts-btn').forEach(function(btn){
-  btn.addEventListener('click',function(){
-    document.querySelectorAll('.pts-btn').forEach(function(b){b.classList.remove('selected')});
-    btn.classList.add('selected');
-    selectedPts=parseFloat(btn.dataset.pts);
+// Discipline buttons
+document.querySelectorAll('.disc-btn').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.disc-btn').forEach(function(x){x.classList.remove('selected')});
+    b.classList.add('selected'); sel.disc=b.dataset.disc; update();
+  });
+});
+
+// Quick points
+document.querySelectorAll('.pts-btn').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.pts-btn').forEach(function(x){x.classList.remove('selected')});
+    b.classList.add('selected');
+    sel.pts=parseFloat(b.dataset.pts);
     document.getElementById('custom-pts').value='';
-    checkReady();
+    update();
   });
 });
 
 // Custom points
 document.getElementById('custom-pts').addEventListener('input',function(){
-  document.querySelectorAll('.pts-btn').forEach(function(b){b.classList.remove('selected')});
+  document.querySelectorAll('.pts-btn').forEach(function(x){x.classList.remove('selected')});
   var v=parseFloat(this.value);
-  selectedPts=isNaN(v)||v<=0?null:v;
-  checkReady();
+  sel.pts=(!isNaN(v)&&v>0)?v:null;
+  update();
 });
 
-// Reason
-document.querySelectorAll('.reason-btn').forEach(function(btn){
-  btn.addEventListener('click',function(){
-    document.querySelectorAll('.reason-btn').forEach(function(b){b.classList.remove('selected')});
-    btn.classList.add('selected');
-    selectedReason=btn.dataset.r;
-    checkReady();
-  });
-});
-
-function checkReady(){
-  document.getElementById('btn-submit').disabled=!(selectedPlayer&&selectedPts&&selectedReason);
+function update(){
+  var btn=document.getElementById('btn-submit');
+  var summary=document.getElementById('summary');
+  var ready=sel.player&&sel.disc&&sel.pts;
+  btn.disabled=!ready;
+  if(ready){
+    var icon=sel.disc==='Darts'?'🎯':'🎱';
+    summary.innerHTML='<span class="summary-player">'+sel.player+'</span>'
+      +'<span class="summary-sep">·</span>'
+      +'<span class="summary-disc">'+icon+' '+sel.disc+'</span>'
+      +'<span class="summary-pts">+'+sel.pts+' pt</span>';
+  } else {
+    summary.innerHTML='<span class="summary-empty">Selecteer een speler, discipline en punten…</span>';
+  }
 }
 
-// Toast
 function toast(msg,type){
   var t=document.getElementById('toast');
-  t.textContent=msg;
-  t.className='toast '+(type||'success')+' show';
-  setTimeout(function(){t.classList.remove('show')},2800);
+  t.textContent=msg; t.className='toast '+(type||'success')+' show';
+  setTimeout(function(){t.classList.remove('show')},3000);
 }
 
-// Add to local log
-function addLog(player,pts,reason){
+function addToLog(player,pts,disc){
   var now=new Date();
   var time=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
-  actionLog.unshift({player:player,pts:pts,reason:reason,time:time});
+  actionLog.unshift({player:player,pts:pts,disc:disc,time:time});
   var log=document.getElementById('action-log');
   log.innerHTML='';
-  actionLog.slice(0,10).forEach(function(e){
-    var row=document.createElement('div');row.className='log-row';
+  actionLog.slice(0,12).forEach(function(e){
+    var icon=e.disc==='Darts'?'🎯':'🎱';
+    var row=document.createElement('div'); row.className='log-row';
     row.innerHTML='<span class="log-pts">+'+e.pts+'</span>'
       +'<span class="log-name">'+e.player+'</span>'
-      +'<span class="log-reason">'+e.reason+'</span>'
+      +'<span class="log-disc">'+icon+' '+e.disc+'</span>'
       +'<span class="log-time">'+e.time+'</span>';
     log.appendChild(row);
   });
 }
 
-// Submit — find player record and patch, or create new
 document.getElementById('btn-submit').addEventListener('click',function(){
   var btn=this;
-  btn.disabled=true;
-  btn.textContent='Bezig...';
+  btn.disabled=true; btn.textContent='Bezig…';
 
-  // First look up existing record for this player
+  // Look up existing record for this player
   fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_TABLE
-    +'?filterByFormula='+encodeURIComponent('{Name}="'+selectedPlayer+'"')
-    +'&maxRecords=1',
+    +'?filterByFormula='+encodeURIComponent('{Name}="'+sel.player+'"')+'&maxRecords=1',
     {headers:{'Authorization':'Bearer '+AT_TOKEN}}
   )
   .then(function(r){return r.json()})
   .then(function(data){
     var records=data.records||[];
+    var ptsToAdd=sel.pts;
+    var field=sel.disc; // "Darts" or "Biljart"
+
     if(records.length>0){
-      // Player exists — add points to existing score
       var rec=records[0];
-      var oldScore=parseFloat(rec.fields.Score)||0;
-      var newScore=Math.round((oldScore+selectedPts)*10)/10;
+      var oldVal=parseFloat(rec.fields[field])||0;
+      var newVal=Math.round((oldVal+ptsToAdd)*10)/10;
+      var fields={};
+      fields[field]=newVal;
+      fields.Timestamp=new Date().toISOString();
       return fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_TABLE+'/'+rec.id,{
         method:'PATCH',
         headers:{'Authorization':'Bearer '+AT_TOKEN,'Content-Type':'application/json'},
-        body:JSON.stringify({fields:{Score:newScore,Timestamp:new Date().toISOString()}})
+        body:JSON.stringify({fields:fields})
       });
     } else {
-      // Player not found — create new record
+      // New record
+      var fields={Name:sel.player,Timestamp:new Date().toISOString()};
+      fields[field]=ptsToAdd;
       return fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_TABLE,{
         method:'POST',
         headers:{'Authorization':'Bearer '+AT_TOKEN,'Content-Type':'application/json'},
-        body:JSON.stringify({fields:{Name:selectedPlayer,Score:selectedPts,Timestamp:new Date().toISOString()}})
+        body:JSON.stringify({fields:fields})
       });
     }
   })
@@ -291,23 +308,21 @@ document.getElementById('btn-submit').addEventListener('click',function(){
     if(data.error){
       toast('Fout: '+data.error.message,'error');
     } else {
-      var newScore=parseFloat(data.fields.Score)||0;
-      toast('✅ +'+selectedPts+' pt voor '+selectedPlayer+' (totaal: '+newScore.toFixed(1)+')','success');
-      addLog(selectedPlayer,selectedPts,selectedReason);
-      // Reset selection
-      document.querySelectorAll('.player-btn').forEach(function(b){b.classList.remove('selected')});
-      document.querySelectorAll('.pts-btn').forEach(function(b){b.classList.remove('selected')});
-      document.querySelectorAll('.reason-btn').forEach(function(b){b.classList.remove('selected')});
+      var newVal=parseFloat(data.fields[sel.disc])||0;
+      var icon=sel.disc==='Darts'?'🎯':'🎱';
+      toast('✅ +'+sel.pts+' pt '+icon+' voor '+sel.player+' ('+sel.disc+': '+newVal+')','success');
+      addToLog(sel.player,sel.pts,sel.disc);
+      // Reset
+      document.querySelectorAll('.player-btn,.disc-btn,.pts-btn').forEach(function(b){b.classList.remove('selected')});
       document.getElementById('custom-pts').value='';
-      selectedPlayer=null; selectedPts=null; selectedReason=null;
+      sel={player:null,disc:null,pts:null};
+      update();
     }
-    btn.textContent='GEEF PUNTEN';
-    checkReady();
+    btn.textContent='BEVESTIG'; update();
   })
   .catch(function(e){
     toast('Verbindingsfout: '+e.message,'error');
-    btn.textContent='GEEF PUNTEN';
-    btn.disabled=false;
+    btn.textContent='BEVESTIG'; btn.disabled=false;
   });
 });
 </script>
