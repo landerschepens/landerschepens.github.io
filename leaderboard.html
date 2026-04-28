@@ -6,7 +6,7 @@
 <title>Leaderboard · Fina Special</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
-  :root{--bg:#0f0f0f;--surface:#181818;--card:#1e1e1e;--border:#2a2a2a;--gold:#e8c547;--text:#f0f0f0;--muted:#888;--dim:#444;--green:#4caf76}
+  :root{--bg:#0f0f0f;--surface:#181818;--card:#1e1e1e;--border:#2a2a2a;--gold:#e8c547;--text:#f0f0f0;--muted:#888;--dim:#444;--green:#4caf76;--purple:#a78bfa;--blue:#60a5fa;--teal:#34d399}
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;display:flex;flex-direction:column}
 
@@ -20,34 +20,50 @@
   .grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(232,197,71,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(232,197,71,.04) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,black 5%,transparent 70%);pointer-events:none}
   .inner{position:relative;z-index:1;max-width:860px;margin:0 auto}
 
-  .page-header{text-align:center;margin-bottom:2.5rem;animation:fadeUp .5s ease both}
-  .page-eyebrow{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(232,197,71,.25);padding:.25rem .9rem;border-radius:99px;display:inline-block;margin-bottom:1.2rem}
-  .page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,10vw,7rem);line-height:.9;letter-spacing:.04em}
+  .page-header{text-align:center;margin-bottom:2rem;animation:fadeUp .5s ease both}
+  .page-eyebrow{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(232,197,71,.25);padding:.25rem .9rem;border-radius:99px;display:inline-block;margin-bottom:1rem}
+  .page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,9vw,6rem);line-height:.9;letter-spacing:.04em}
   .page-title span{color:var(--gold)}
-  .page-sub{font-size:.85rem;color:var(--muted);font-weight:300;margin-top:.8rem}
+
+  /* Tabs */
+  .tabs{display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem;animation:fadeUp .5s .05s ease both}
+  .tab{font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.5rem 1.2rem;border-radius:4px;border:1px solid var(--border);background:var(--card);color:var(--muted);cursor:pointer;transition:all .2s}
+  .tab:hover{border-color:var(--muted);color:var(--text)}
+  .tab.active-algemeen{border-color:rgba(232,197,71,.5);background:rgba(232,197,71,.1);color:var(--gold)}
+  .tab.active-quiz{border-color:rgba(167,139,250,.5);background:rgba(167,139,250,.1);color:var(--purple)}
+  .tab.active-darts{border-color:rgba(96,165,250,.5);background:rgba(96,165,250,.1);color:var(--blue)}
+  .tab.active-biljart{border-color:rgba(52,211,153,.5);background:rgba(52,211,153,.1);color:var(--teal)}
 
   /* Podium */
-  .podium{display:flex;align-items:flex-end;justify-content:center;gap:1rem;margin-bottom:2.5rem;animation:fadeUp .5s .1s ease both}
+  .podium{display:flex;align-items:flex-end;justify-content:center;gap:1rem;margin-bottom:2rem;animation:fadeUp .5s .1s ease both;min-height:160px}
   .podium-slot{flex:1;max-width:200px;display:flex;flex-direction:column;align-items:center;gap:.4rem}
-  .podium-crown{font-size:1.5rem;line-height:1}
-  .podium-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.3rem;border:2px solid var(--border)}
+  .podium-crown{font-size:1.4rem;line-height:1}
+  .podium-avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;border:2px solid var(--border)}
   .podium-slot.r1 .podium-avatar{border-color:var(--gold);background:rgba(232,197,71,.12);color:var(--gold)}
   .podium-slot.r2 .podium-avatar{border-color:#aaa;background:rgba(170,170,170,.1);color:#ccc}
   .podium-slot.r3 .podium-avatar{border-color:#cd7f32;background:rgba(205,127,50,.1);color:#cd7f32}
-  .podium-name{font-size:.82rem;font-weight:600;text-align:center;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .podium-pts{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--gold)}
+  .podium-name{font-size:.8rem;font-weight:600;text-align:center;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .podium-pts{font-family:'Bebas Neue',sans-serif;font-size:1.2rem}
+  .podium-slot.r1 .podium-pts{color:var(--gold)}
+  .podium-slot.r2 .podium-pts{color:#ccc}
+  .podium-slot.r3 .podium-pts{color:#cd7f32}
   .podium-bar{width:100%;border-radius:4px 4px 0 0;background:var(--card);border:1px solid var(--border);border-bottom:none}
   .podium-slot.r1 .podium-bar{height:80px;border-color:rgba(232,197,71,.3)}
   .podium-slot.r2 .podium-bar{height:56px}
   .podium-slot.r3 .podium-bar{height:40px}
 
   /* Table */
-  .lb-wrap{animation:fadeUp .5s .2s ease both}
+  .lb-wrap{animation:fadeUp .5s .15s ease both}
   .lb-table{width:100%;border:1px solid var(--border);border-radius:8px;overflow:hidden}
-  .lb-row{display:grid;grid-template-columns:2.5rem 1.5rem 1fr 4rem 4rem 4rem 5rem;align-items:center;padding:.75rem 1rem;border-bottom:1px solid var(--border);gap:.5rem;transition:background .15s}
+  .lb-row{display:grid;align-items:center;padding:.75rem 1rem;border-bottom:1px solid var(--border);gap:.5rem;transition:background .15s}
   .lb-row:last-child{border-bottom:none}
   .lb-row:hover:not(.header){background:rgba(255,255,255,.02)}
   .lb-row.header{background:var(--surface);padding:.55rem 1rem}
+
+  /* Grid templates per tab */
+  .mode-algemeen .lb-row{grid-template-columns:2.5rem 1.5rem 1fr 4rem 4rem 4rem 5rem}
+  .mode-quiz .lb-row,.mode-darts .lb-row,.mode-biljart .lb-row{grid-template-columns:2.5rem 1.5rem 1fr 5rem}
+
   .lb-rank{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--dim);text-align:center}
   .lb-row:nth-child(2) .lb-rank{color:var(--gold)}
   .lb-row:nth-child(3) .lb-rank{color:#ccc}
@@ -55,14 +71,13 @@
   .lb-medal{text-align:center;font-size:.9rem}
   .lb-name{font-weight:500;font-size:.9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .lb-cell{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;text-align:right;color:var(--muted)}
-  .lb-total{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;text-align:right;color:var(--gold)}
+  .lb-total{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;text-align:right}
+  .mode-algemeen .lb-total{color:var(--gold)}
+  .mode-quiz .lb-total{color:var(--purple)}
+  .mode-darts .lb-total{color:var(--blue)}
+  .mode-biljart .lb-total{color:var(--teal)}
   .hdr{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:600;text-align:right}
   .hdr.left{text-align:left}
-
-  /* Discipline legend */
-  .legend{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem;animation:fadeUp .5s .15s ease both}
-  .legend-item{display:flex;align-items:center;gap:.4rem;font-size:.72rem;color:var(--muted)}
-  .legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 
   /* Loading */
   .lb-state{text-align:center;padding:3rem 1rem}
@@ -76,10 +91,9 @@
   footer{text-align:center;padding:1.5rem 2rem;border-top:1px solid var(--border);color:var(--dim);font-size:.75rem;letter-spacing:.05em}
   @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
   @keyframes spin{to{transform:rotate(360deg)}}
-
   @media(max-width:600px){
     nav{padding:0 1.2rem}.nav-links a .txt{display:none}
-    .lb-row{grid-template-columns:2rem 1.2rem 1fr 3.2rem 3.2rem 3.2rem 4rem;gap:.3rem;padding:.65rem .7rem}
+    .mode-algemeen .lb-row{grid-template-columns:2rem 1.2rem 1fr 3rem 3rem 3rem 4rem;gap:.3rem;padding:.6rem .7rem}
     .podium{gap:.5rem}
   }
 </style>
@@ -102,27 +116,21 @@
 
     <div class="page-header">
       <div class="page-eyebrow">Fina Special</div>
-      <div class="page-title">Algemeen<br><span>Klassement</span></div>
-      <div class="page-sub">Quiz · Darts · Biljart · Totaal — live bijgewerkt</div>
+      <div class="page-title">Leader<span>board</span></div>
     </div>
 
-    <div class="legend">
-      <div class="legend-item"><div class="legend-dot" style="background:#a78bfa"></div>🧠 Quiz (0.5 pt/vraag)</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#60a5fa"></div>🎯 Darts</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#34d399"></div>🎱 Biljart</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div>🏆 Totaal</div>
+    <div class="tabs">
+      <button class="tab active-algemeen" data-mode="algemeen">🏆 Algemeen</button>
+      <button class="tab" data-mode="quiz">🧠 Quiz</button>
+      <button class="tab" data-mode="darts">🎯 Darts</button>
+      <button class="tab" data-mode="biljart">🎱 Biljart</button>
     </div>
 
     <div id="podium-wrap"></div>
-
     <div class="lb-wrap">
-      <div id="lb-wrap-inner">
-        <div class="lb-state"><div class="lb-spinner"></div><div class="lb-state-txt">Scores laden...</div></div>
-      </div>
+      <div id="lb-inner"><div class="lb-state"><div class="lb-spinner"></div><div class="lb-state-txt">Laden...</div></div></div>
       <div style="text-align:center">
-        <button class="refresh-btn" id="refresh-btn">
-          <span id="refresh-icon">↻</span> Vernieuwen
-        </button>
+        <button class="refresh-btn" id="refresh-btn"><span id="refresh-icon">↻</span> Vernieuwen</button>
       </div>
     </div>
 
@@ -132,103 +140,125 @@
 <footer>Fina Special &nbsp;·&nbsp; Leaderboard &nbsp;·&nbsp; Auto-refresh elke 30s</footer>
 
 <script>
-var AT_BASE='appcZ6eL9mrvzI7d1';
-var AT_TABLE='tbl3MM97n3v5Fithf';
+var AT_BASE='appcZ6eL9mrvzI7d1', AT_TABLE='tbl3MM97n3v5Fithf';
 var AT_TOKEN='patHtVCKSUefoV18U.305cca252c0d4874fb7fa65f23aaf24f0de5e31b3085caefdbe0d39b4a4c5ef8';
 var MEDALS=['🥇','🥈','🥉'];
+var currentMode='algemeen';
+var allRecords=[];
 
-function fmt(n){return n%1===0?n.toFixed(0):n.toFixed(1);}
+function fmt(n){if(n===0)return '—'; return n%1===0?String(n):n.toFixed(1);}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function initials(n){return n.trim().split(/\s+/).map(function(w){return w[0]}).join('').toUpperCase().slice(0,2);}
-function ftime(iso){try{var d=new Date(iso);return d.toLocaleTimeString('nl-BE',{hour:'2-digit',minute:'2-digit'});}catch(e){return '';}}
 
 function load(){
-  var url='https://api.airtable.com/v0/'+AT_BASE+'/'+AT_TABLE+'?pageSize=100';
-  fetch(url,{headers:{'Authorization':'Bearer '+AT_TOKEN}})
+  fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_TABLE+'?pageSize=100',
+    {headers:{'Authorization':'Bearer '+AT_TOKEN}})
   .then(function(r){return r.json()})
   .then(function(data){
-    var records=(data.records||[]).map(function(r){
+    allRecords=(data.records||[]).map(function(r){
       var f=r.fields;
       var quiz=parseFloat(f.Quiz)||0;
       var darts=parseFloat(f.Darts)||0;
       var biljart=parseFloat(f.Biljart)||0;
-      var total=Math.round((quiz+darts+biljart)*10)/10;
-      return {name:f.Name||'?',quiz:quiz,darts:darts,biljart:biljart,total:total,time:f.Timestamp||''};
+      return {name:f.Name||'?', quiz:quiz, darts:darts, biljart:biljart,
+              total:Math.round((quiz+darts+biljart)*10)/10, time:f.Timestamp||''};
     });
-    records.sort(function(a,b){
-      if(b.total!==a.total) return b.total-a.total;
-      return new Date(a.time)-new Date(b.time);
-    });
-    render(records);
+    renderMode(currentMode);
   })
   .catch(function(e){
-    document.getElementById('lb-wrap-inner').innerHTML=
-      '<div class="lb-state"><div class="lb-state-txt">❌ Kon scores niet laden: '+e.message+'</div></div>';
+    document.getElementById('lb-inner').innerHTML=
+      '<div class="lb-state"><div class="lb-state-txt">❌ '+e.message+'</div></div>';
   });
 }
 
-function render(records){
+function sortFor(mode){
+  var sorted=allRecords.slice();
+  var key=mode==='algemeen'?'total':mode;
+  sorted.sort(function(a,b){
+    if(b[key]!==a[key]) return b[key]-a[key];
+    return new Date(a.time)-new Date(b.time);
+  });
+  return sorted;
+}
+
+function renderMode(mode){
+  var records=sortFor(mode);
+  var key=mode==='algemeen'?'total':mode;
   var podWrap=document.getElementById('podium-wrap');
-  var lbInner=document.getElementById('lb-wrap-inner');
+  var lbInner=document.getElementById('lb-inner');
 
   if(records.length===0){
     podWrap.innerHTML='';
-    lbInner.innerHTML='<div class="lb-state"><div class="lb-state-txt">Nog geen scores. Wees de eerste! 🎯</div></div>';
+    lbInner.innerHTML='<div class="lb-state"><div class="lb-state-txt">Nog geen scores 🎯</div></div>';
     return;
   }
 
-  // Podium top 3
-  if(records.length>=2){
-    var top=records.slice(0,Math.min(3,records.length));
-    var order=top.length>=3?[top[1],top[0],top[2]]:[top[1],top[0]];
-    var ranks=top.length>=3?[2,1,3]:[2,1];
-    var crowns=['🥈','👑','🥉'];
-    var html='<div class="podium">';
-    order.forEach(function(r,i){
-      var rk=ranks[i];
-      html+='<div class="podium-slot r'+rk+'">'
-        +'<div class="podium-crown">'+crowns[i]+'</div>'
-        +'<div class="podium-avatar">'+esc(initials(r.name))+'</div>'
-        +'<div class="podium-name">'+esc(r.name)+'</div>'
-        +'<div class="podium-pts">'+fmt(r.total)+' pt</div>'
-        +'<div class="podium-bar"></div>'
-        +'</div>';
-    });
-    html+='</div>';
-    podWrap.innerHTML=html;
+  // Podium
+  var top=records.slice(0,Math.min(3,records.length));
+  var order=top.length>=3?[top[1],top[0],top[2]]:(top.length===2?[top[1],top[0]]:[top[0]]);
+  var ranks=top.length>=3?[2,1,3]:(top.length===2?[2,1]:[1]);
+  var crowns=['🥈','👑','🥉'];
+  var html='<div class="podium">';
+  order.forEach(function(r,i){
+    var rk=ranks[i];
+    html+='<div class="podium-slot r'+rk+'">'
+      +'<div class="podium-crown">'+crowns[i]+'</div>'
+      +'<div class="podium-avatar">'+esc(initials(r.name))+'</div>'
+      +'<div class="podium-name">'+esc(r.name)+'</div>'
+      +'<div class="podium-pts">'+fmt(r[key])+' pt</div>'
+      +'<div class="podium-bar"></div></div>';
+  });
+  html+='</div>';
+  podWrap.innerHTML=html;
+
+  // Table
+  var modeClass='mode-'+mode;
+  var html2='<div class="lb-table '+modeClass+'">';
+
+  // Header
+  if(mode==='algemeen'){
+    html2+='<div class="lb-row header"><span class="hdr">#</span><span></span>'
+      +'<span class="hdr left">Naam</span>'
+      +'<span class="hdr">🧠</span><span class="hdr">🎯</span><span class="hdr">🎱</span>'
+      +'<span class="hdr" style="color:var(--gold)">Totaal</span></div>';
   } else {
-    podWrap.innerHTML='';
+    var icons={quiz:'🧠 Quiz',darts:'🎯 Darts',biljart:'🎱 Biljart'};
+    html2+='<div class="lb-row header"><span class="hdr">#</span><span></span>'
+      +'<span class="hdr left">Naam</span>'
+      +'<span class="hdr">'+icons[mode]+'</span></div>';
   }
 
-  // Full table
-  var html2='<div class="lb-table">';
-  // Header
-  html2+='<div class="lb-row header">'
-    +'<span class="hdr">#</span>'
-    +'<span></span>'
-    +'<span class="hdr left">Naam</span>'
-    +'<span class="hdr">🧠</span>'
-    +'<span class="hdr">🎯</span>'
-    +'<span class="hdr">🎱</span>'
-    +'<span class="hdr" style="color:var(--gold)">Totaal</span>'
-    +'</div>';
-
   records.forEach(function(r,i){
-    var rank=i+1;
-    var medal=rank<=3?MEDALS[rank-1]:'';
-    html2+='<div class="lb-row">'
-      +'<span class="lb-rank">'+rank+'</span>'
-      +'<span class="lb-medal">'+medal+'</span>'
-      +'<span class="lb-name">'+esc(r.name)+'</span>'
-      +'<span class="lb-cell">'+fmt(r.quiz)+'</span>'
-      +'<span class="lb-cell">'+fmt(r.darts)+'</span>'
-      +'<span class="lb-cell">'+fmt(r.biljart)+'</span>'
-      +'<span class="lb-total">'+fmt(r.total)+'</span>'
-      +'</div>';
+    var rank=i+1, medal=rank<=3?MEDALS[rank-1]:'';
+    if(mode==='algemeen'){
+      html2+='<div class="lb-row">'
+        +'<span class="lb-rank">'+rank+'</span><span class="lb-medal">'+medal+'</span>'
+        +'<span class="lb-name">'+esc(r.name)+'</span>'
+        +'<span class="lb-cell">'+fmt(r.quiz)+'</span>'
+        +'<span class="lb-cell">'+fmt(r.darts)+'</span>'
+        +'<span class="lb-cell">'+fmt(r.biljart)+'</span>'
+        +'<span class="lb-total">'+fmt(r.total)+'</span></div>';
+    } else {
+      html2+='<div class="lb-row">'
+        +'<span class="lb-rank">'+rank+'</span><span class="lb-medal">'+medal+'</span>'
+        +'<span class="lb-name">'+esc(r.name)+'</span>'
+        +'<span class="lb-total">'+fmt(r[key])+'</span></div>';
+    }
   });
   html2+='</div>';
   lbInner.innerHTML=html2;
 }
+
+// Tabs
+document.querySelectorAll('.tab').forEach(function(tab){
+  tab.addEventListener('click',function(){
+    document.querySelectorAll('.tab').forEach(function(t){t.className='tab'});
+    var mode=tab.dataset.mode;
+    tab.className='tab active-'+mode;
+    currentMode=mode;
+    renderMode(mode);
+  });
+});
 
 document.getElementById('refresh-btn').addEventListener('click',function(){
   var icon=document.getElementById('refresh-icon');
