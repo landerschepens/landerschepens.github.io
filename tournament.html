@@ -284,9 +284,26 @@
     .grid { grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
     .round-card { break-inside: avoid; }
   }
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:58px;background:rgba(15,15,15,.9);backdrop-filter:blur(14px);border-bottom:1px solid #2a2a2a}
+  .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.14em;color:#e8c547;text-decoration:none}
+  .nav-links{display:flex;gap:.3rem;list-style:none}
+  .nav-links a{display:flex;align-items:center;gap:.35rem;padding:.35rem .9rem;border-radius:4px;border:1px solid transparent;text-decoration:none;font-size:.78rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#888;transition:color .2s,border-color .2s,background .2s}
+  .nav-links a:hover,.nav-links a.active{color:#e8c547;border-color:rgba(232,197,71,.3);background:rgba(232,197,71,.06)}
+  body { padding-top: 58px; }
 </style>
 </head>
 <body>
+<nav>
+  <a class="nav-logo" href="index.html">Fina Special</a>
+  <ul class="nav-links">
+    <li><a href="quiz.html">🧠 <span class="txt">Quiz</span></a></li>
+    <li><a href="tournament.html" class="active">🎯 <span class="txt">Toernooi</span></a></li>
+    <li><a href="leaderboard.html">🏅 <span class="txt">Leaderboard</span></a></li>
+    <li><a href="finals.html">⚡ <span class="txt">Finale</span></a></li>
+  </ul>
+</nav>
+
 
 <header>
   <h1>Toernooi Schema</h1>
