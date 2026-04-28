@@ -18,61 +18,70 @@
 
   .main{flex:1;padding:5rem 1.5rem 3rem;position:relative;overflow:hidden}
   .grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(232,197,71,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(232,197,71,.04) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,black 5%,transparent 70%);pointer-events:none}
+  .inner{position:relative;z-index:1;max-width:860px;margin:0 auto}
 
-  .inner{position:relative;z-index:1;max-width:700px;margin:0 auto}
-
-  .page-header{text-align:center;margin-bottom:3rem;animation:fadeUp .5s ease both}
+  .page-header{text-align:center;margin-bottom:2.5rem;animation:fadeUp .5s ease both}
   .page-eyebrow{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(232,197,71,.25);padding:.25rem .9rem;border-radius:99px;display:inline-block;margin-bottom:1.2rem}
   .page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,10vw,7rem);line-height:.9;letter-spacing:.04em}
   .page-title span{color:var(--gold)}
   .page-sub{font-size:.85rem;color:var(--muted);font-weight:300;margin-top:.8rem}
 
-  /* Top 3 podium */
+  /* Podium */
   .podium{display:flex;align-items:flex-end;justify-content:center;gap:1rem;margin-bottom:2.5rem;animation:fadeUp .5s .1s ease both}
-  .podium-slot{flex:1;max-width:180px;display:flex;flex-direction:column;align-items:center;gap:.5rem}
-  .podium-crown{font-size:1.6rem;line-height:1}
-  .podium-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.04em;border:2px solid var(--border)}
-  .podium-slot.rank-1 .podium-avatar{border-color:var(--gold);background:rgba(232,197,71,.12);color:var(--gold)}
-  .podium-slot.rank-2 .podium-avatar{border-color:#aaa;background:rgba(170,170,170,.1);color:#ccc}
-  .podium-slot.rank-3 .podium-avatar{border-color:#cd7f32;background:rgba(205,127,50,.1);color:#cd7f32}
-  .podium-name{font-size:.82rem;font-weight:600;text-align:center;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .podium-score{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--muted)}
+  .podium-slot{flex:1;max-width:200px;display:flex;flex-direction:column;align-items:center;gap:.4rem}
+  .podium-crown{font-size:1.5rem;line-height:1}
+  .podium-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.3rem;border:2px solid var(--border)}
+  .podium-slot.r1 .podium-avatar{border-color:var(--gold);background:rgba(232,197,71,.12);color:var(--gold)}
+  .podium-slot.r2 .podium-avatar{border-color:#aaa;background:rgba(170,170,170,.1);color:#ccc}
+  .podium-slot.r3 .podium-avatar{border-color:#cd7f32;background:rgba(205,127,50,.1);color:#cd7f32}
+  .podium-name{font-size:.82rem;font-weight:600;text-align:center;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .podium-pts{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--gold)}
   .podium-bar{width:100%;border-radius:4px 4px 0 0;background:var(--card);border:1px solid var(--border);border-bottom:none}
-  .podium-slot.rank-1 .podium-bar{height:80px;border-color:rgba(232,197,71,.3)}
-  .podium-slot.rank-2 .podium-bar{height:56px}
-  .podium-slot.rank-3 .podium-bar{height:40px}
+  .podium-slot.r1 .podium-bar{height:80px;border-color:rgba(232,197,71,.3)}
+  .podium-slot.r2 .podium-bar{height:56px}
+  .podium-slot.r3 .podium-bar{height:40px}
 
-  /* Full table */
-  .lb-table{width:100%;border:1px solid var(--border);border-radius:8px;overflow:hidden;animation:fadeUp .5s .2s ease both}
-  .lb-row{display:flex;align-items:center;padding:.9rem 1.2rem;border-bottom:1px solid var(--border);gap:1rem;transition:background .15s}
+  /* Table */
+  .lb-wrap{animation:fadeUp .5s .2s ease both}
+  .lb-table{width:100%;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+  .lb-row{display:grid;grid-template-columns:2.5rem 1.5rem 1fr 4rem 4rem 4rem 5rem;align-items:center;padding:.75rem 1rem;border-bottom:1px solid var(--border);gap:.5rem;transition:background .15s}
   .lb-row:last-child{border-bottom:none}
-  .lb-row:hover{background:rgba(255,255,255,.02)}
-  .lb-row.header{background:var(--surface);padding:.6rem 1.2rem}
-  .lb-rank{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;min-width:2rem;text-align:center;color:var(--dim)}
+  .lb-row:hover:not(.header){background:rgba(255,255,255,.02)}
+  .lb-row.header{background:var(--surface);padding:.55rem 1rem}
+  .lb-rank{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--dim);text-align:center}
   .lb-row:nth-child(2) .lb-rank{color:var(--gold)}
   .lb-row:nth-child(3) .lb-rank{color:#ccc}
   .lb-row:nth-child(4) .lb-rank{color:#cd7f32}
-  .lb-medal{font-size:1rem;min-width:1.4rem;text-align:center}
-  .lb-name{flex:1;font-weight:500;font-size:.92rem}
-  .lb-score{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--gold);min-width:3rem;text-align:right}
-  .lb-time{font-size:.7rem;color:var(--dim);min-width:5rem;text-align:right}
-  .hdr-lbl{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:600}
+  .lb-medal{text-align:center;font-size:.9rem}
+  .lb-name{font-weight:500;font-size:.9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .lb-cell{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;text-align:right;color:var(--muted)}
+  .lb-total{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;text-align:right;color:var(--gold)}
+  .hdr{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:600;text-align:right}
+  .hdr.left{text-align:left}
 
-  /* Loading / empty */
+  /* Discipline legend */
+  .legend{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem;animation:fadeUp .5s .15s ease both}
+  .legend-item{display:flex;align-items:center;gap:.4rem;font-size:.72rem;color:var(--muted)}
+  .legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+  /* Loading */
   .lb-state{text-align:center;padding:3rem 1rem}
   .lb-spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 1rem}
   .lb-state-txt{font-size:.9rem;color:var(--muted);font-weight:300}
 
   .refresh-btn{display:flex;align-items:center;gap:.5rem;margin:1.5rem auto 0;background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:.4rem 1rem;border-radius:4px;cursor:pointer;transition:color .2s,border-color .2s}
   .refresh-btn:hover{color:var(--text);border-color:var(--muted)}
-  .refresh-icon{font-size:.9rem;display:inline-block;transition:transform .4s}
-  .refresh-btn.spinning .refresh-icon{animation:spin .6s linear infinite}
+  .spin{animation:spin .6s linear infinite;display:inline-block}
 
   footer{text-align:center;padding:1.5rem 2rem;border-top:1px solid var(--border);color:var(--dim);font-size:.75rem;letter-spacing:.05em}
-
   @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
   @keyframes spin{to{transform:rotate(360deg)}}
-  @media(max-width:520px){nav{padding:0 1.2rem}.nav-links a .txt{display:none}.lb-time{display:none}.podium{gap:.5rem}}
+
+  @media(max-width:600px){
+    nav{padding:0 1.2rem}.nav-links a .txt{display:none}
+    .lb-row{grid-template-columns:2rem 1.2rem 1fr 3.2rem 3.2rem 3.2rem 4rem;gap:.3rem;padding:.65rem .7rem}
+    .podium{gap:.5rem}
+  }
 </style>
 </head>
 <body>
@@ -82,6 +91,7 @@
     <li><a href="quiz.html">🧠 <span class="txt">Quiz</span></a></li>
     <li><a href="tournament.html">🎯 <span class="txt">Toernooi</span></a></li>
     <li><a href="leaderboard.html" class="active">🏅 <span class="txt">Leaderboard</span></a></li>
+    <li><a href="admin.html">⚙️ <span class="txt">Admin</span></a></li>
     <li><a href="finals.html">⚡ <span class="txt">Finale</span></a></li>
   </ul>
 </nav>
@@ -91,95 +101,96 @@
   <div class="inner">
 
     <div class="page-header">
-      <div class="page-eyebrow">Fina Special · Quiz</div>
-      <div class="page-title">Leader<span>board</span></div>
-      <div class="page-sub">Live resultaten · gesorteerd op score</div>
+      <div class="page-eyebrow">Fina Special</div>
+      <div class="page-title">Algemeen<br><span>Klassement</span></div>
+      <div class="page-sub">Quiz · Darts · Biljart · Totaal — live bijgewerkt</div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#a78bfa"></div>🧠 Quiz (0.5 pt/vraag)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#60a5fa"></div>🎯 Darts</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#34d399"></div>🎱 Biljart</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div>🏆 Totaal</div>
     </div>
 
     <div id="podium-wrap"></div>
-    <div id="lb-wrap"></div>
 
-    <div style="text-align:center">
-      <button class="refresh-btn" id="refresh-btn">
-        <span class="refresh-icon" id="refresh-icon">↻</span> Vernieuwen
-      </button>
+    <div class="lb-wrap">
+      <div id="lb-wrap-inner">
+        <div class="lb-state"><div class="lb-spinner"></div><div class="lb-state-txt">Scores laden...</div></div>
+      </div>
+      <div style="text-align:center">
+        <button class="refresh-btn" id="refresh-btn">
+          <span id="refresh-icon">↻</span> Vernieuwen
+        </button>
+      </div>
     </div>
 
   </div>
 </div>
 
-<footer>Fina Special &nbsp;·&nbsp; Leaderboard &nbsp;·&nbsp; Live via Airtable</footer>
+<footer>Fina Special &nbsp;·&nbsp; Leaderboard &nbsp;·&nbsp; Auto-refresh elke 30s</footer>
 
 <script>
 var AT_BASE='appcZ6eL9mrvzI7d1';
 var AT_TABLE='tbl3MM97n3v5Fithf';
 var AT_TOKEN='patHtVCKSUefoV18U.305cca252c0d4874fb7fa65f23aaf24f0de5e31b3085caefdbe0d39b4a4c5ef8';
 var MEDALS=['🥇','🥈','🥉'];
-var CROWNS=['👑','🥈','🥉'];
 
-function formatTime(iso){
-  try{
-    var d=new Date(iso);
-    return d.toLocaleTimeString('nl-BE',{hour:'2-digit',minute:'2-digit'});
-  }catch(e){return ''}
-}
+function fmt(n){return n%1===0?n.toFixed(0):n.toFixed(1);}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function initials(n){return n.trim().split(/\s+/).map(function(w){return w[0]}).join('').toUpperCase().slice(0,2);}
+function ftime(iso){try{var d=new Date(iso);return d.toLocaleTimeString('nl-BE',{hour:'2-digit',minute:'2-digit'});}catch(e){return '';}}
 
-function initials(name){
-  return name.trim().split(/\s+/).map(function(w){return w[0]}).join('').toUpperCase().slice(0,2);
-}
-
-function loadScores(){
-  var lbWrap=document.getElementById('lb-wrap');
-  var podWrap=document.getElementById('podium-wrap');
-  lbWrap.innerHTML='<div class="lb-state"><div class="lb-spinner"></div><div class="lb-state-txt">Scores laden...</div></div>';
-  podWrap.innerHTML='';
-
-  var url='https://api.airtable.com/v0/'+AT_BASE+'/'+encodeURIComponent(AT_TABLE)
-    +'?sort[0][field]=Score&sort[0][direction]=desc&pageSize=100';
-
+function load(){
+  var url='https://api.airtable.com/v0/'+AT_BASE+'/'+AT_TABLE+'?pageSize=100';
   fetch(url,{headers:{'Authorization':'Bearer '+AT_TOKEN}})
   .then(function(r){return r.json()})
   .then(function(data){
     var records=(data.records||[]).map(function(r){
-      return {name:r.fields.Name||'Anoniem',score:parseFloat(r.fields.Score)||0,time:r.fields.Timestamp||''};
+      var f=r.fields;
+      var quiz=parseFloat(f.Quiz)||0;
+      var darts=parseFloat(f.Darts)||0;
+      var biljart=parseFloat(f.Biljart)||0;
+      var total=Math.round((quiz+darts+biljart)*10)/10;
+      return {name:f.Name||'?',quiz:quiz,darts:darts,biljart:biljart,total:total,time:f.Timestamp||''};
     });
-    // Sort by score desc, then by timestamp asc (earlier = better on tie)
     records.sort(function(a,b){
-      if(b.score!==a.score)return b.score-a.score;
+      if(b.total!==a.total) return b.total-a.total;
       return new Date(a.time)-new Date(b.time);
     });
-    renderLeaderboard(records);
+    render(records);
   })
-  .catch(function(){
-    lbWrap.innerHTML='<div class="lb-state"><div class="lb-state-txt">❌ Kon scores niet laden. Controleer je verbinding.</div></div>';
+  .catch(function(e){
+    document.getElementById('lb-wrap-inner').innerHTML=
+      '<div class="lb-state"><div class="lb-state-txt">❌ Kon scores niet laden: '+e.message+'</div></div>';
   });
 }
 
-function renderLeaderboard(records){
+function render(records){
   var podWrap=document.getElementById('podium-wrap');
-  var lbWrap=document.getElementById('lb-wrap');
+  var lbInner=document.getElementById('lb-wrap-inner');
 
   if(records.length===0){
     podWrap.innerHTML='';
-    lbWrap.innerHTML='<div class="lb-state"><div class="lb-state-txt">Nog geen scores. Wees de eerste! 🎯</div></div>';
+    lbInner.innerHTML='<div class="lb-state"><div class="lb-state-txt">Nog geen scores. Wees de eerste! 🎯</div></div>';
     return;
   }
 
-  // Podium (top 3)
+  // Podium top 3
   if(records.length>=2){
-    var top=records.slice(0,3);
-    // display order: 2nd, 1st, 3rd
-    var order=records.length>=3?[top[1],top[0],top[2]]:[top[1],top[0]];
-    var rankOrder=records.length>=3?[2,1,3]:[2,1];
+    var top=records.slice(0,Math.min(3,records.length));
+    var order=top.length>=3?[top[1],top[0],top[2]]:[top[1],top[0]];
+    var ranks=top.length>=3?[2,1,3]:[2,1];
+    var crowns=['🥈','👑','🥉'];
     var html='<div class="podium">';
     order.forEach(function(r,i){
-      var rank=rankOrder[i];
-      var pct=Math.round((r.score/r.total)*100);
-      html+='<div class="podium-slot rank-'+rank+'">'
-        +'<div class="podium-crown">'+CROWNS[rank-1]+'</div>'
-        +'<div class="podium-avatar">'+initials(r.name)+'</div>'
-        +'<div class="podium-name">'+escHtml(r.name)+'</div>'
-        +'<div class="podium-score">'+r.score.toFixed(1)+' pt</div>'
+      var rk=ranks[i];
+      html+='<div class="podium-slot r'+rk+'">'
+        +'<div class="podium-crown">'+crowns[i]+'</div>'
+        +'<div class="podium-avatar">'+esc(initials(r.name))+'</div>'
+        +'<div class="podium-name">'+esc(r.name)+'</div>'
+        +'<div class="podium-pts">'+fmt(r.total)+' pt</div>'
         +'<div class="podium-bar"></div>'
         +'</div>';
     });
@@ -191,45 +202,43 @@ function renderLeaderboard(records){
 
   // Full table
   var html2='<div class="lb-table">';
+  // Header
   html2+='<div class="lb-row header">'
-    +'<span class="lb-rank hdr-lbl">#</span>'
-    +'<span class="lb-medal"></span>'
-    +'<span class="lb-name hdr-lbl">Naam</span>'
-    +'<span class="lb-score hdr-lbl">Punten</span>'
-    +'<span class="lb-time hdr-lbl">Tijd</span>'
+    +'<span class="hdr">#</span>'
+    +'<span></span>'
+    +'<span class="hdr left">Naam</span>'
+    +'<span class="hdr">🧠</span>'
+    +'<span class="hdr">🎯</span>'
+    +'<span class="hdr">🎱</span>'
+    +'<span class="hdr" style="color:var(--gold)">Totaal</span>'
     +'</div>';
 
   records.forEach(function(r,i){
     var rank=i+1;
-    var pct=Math.round((r.score/r.total)*100);
     var medal=rank<=3?MEDALS[rank-1]:'';
     html2+='<div class="lb-row">'
       +'<span class="lb-rank">'+rank+'</span>'
       +'<span class="lb-medal">'+medal+'</span>'
-      +'<span class="lb-name">'+escHtml(r.name)+'</span>'
-      +'<span class="lb-score">'+r.score.toFixed(1)+'</span>'
-      +'<span class="lb-time">'+formatTime(r.time)+'</span>'
+      +'<span class="lb-name">'+esc(r.name)+'</span>'
+      +'<span class="lb-cell">'+fmt(r.quiz)+'</span>'
+      +'<span class="lb-cell">'+fmt(r.darts)+'</span>'
+      +'<span class="lb-cell">'+fmt(r.biljart)+'</span>'
+      +'<span class="lb-total">'+fmt(r.total)+'</span>'
       +'</div>';
   });
   html2+='</div>';
-  lbWrap.innerHTML=html2;
+  lbInner.innerHTML=html2;
 }
 
-function escHtml(s){
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-// Refresh button
 document.getElementById('refresh-btn').addEventListener('click',function(){
-  var btn=this, icon=document.getElementById('refresh-icon');
-  btn.classList.add('spinning'); btn.disabled=true;
-  loadScores();
-  setTimeout(function(){btn.classList.remove('spinning');btn.disabled=false;},1000);
+  var icon=document.getElementById('refresh-icon');
+  icon.className='spin'; this.disabled=true;
+  load();
+  setTimeout(function(){icon.className='';document.getElementById('refresh-btn').disabled=false;},1000);
 });
 
-// Auto-refresh every 30s
-loadScores();
-setInterval(loadScores, 30000);
+load();
+setInterval(load,30000);
 </script>
 </body>
 </html>
