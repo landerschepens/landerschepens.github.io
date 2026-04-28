@@ -55,7 +55,6 @@
   .lb-medal{font-size:1rem;min-width:1.4rem;text-align:center}
   .lb-name{flex:1;font-weight:500;font-size:.92rem}
   .lb-score{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--gold);min-width:3rem;text-align:right}
-  .lb-pct{font-size:.72rem;color:var(--muted);min-width:3rem;text-align:right}
   .lb-time{font-size:.7rem;color:var(--dim);min-width:5rem;text-align:right}
   .hdr-lbl{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:600}
 
@@ -142,7 +141,7 @@ function loadScores(){
   .then(function(r){return r.json()})
   .then(function(data){
     var records=(data.records||[]).map(function(r){
-      return {name:r.fields.Name||'Anoniem',score:r.fields.Score||0,total:r.fields.Total||43,time:r.fields.Timestamp||''};
+      return {name:r.fields.Name||'Anoniem',score:parseFloat(r.fields.Score)||0,time:r.fields.Timestamp||''};
     });
     // Sort by score desc, then by timestamp asc (earlier = better on tie)
     records.sort(function(a,b){
@@ -180,7 +179,7 @@ function renderLeaderboard(records){
         +'<div class="podium-crown">'+CROWNS[rank-1]+'</div>'
         +'<div class="podium-avatar">'+initials(r.name)+'</div>'
         +'<div class="podium-name">'+escHtml(r.name)+'</div>'
-        +'<div class="podium-score">'+r.score+' / '+r.total+'</div>'
+        +'<div class="podium-score">'+r.score.toFixed(1)+' pt</div>'
         +'<div class="podium-bar"></div>'
         +'</div>';
     });
@@ -196,8 +195,7 @@ function renderLeaderboard(records){
     +'<span class="lb-rank hdr-lbl">#</span>'
     +'<span class="lb-medal"></span>'
     +'<span class="lb-name hdr-lbl">Naam</span>'
-    +'<span class="lb-score hdr-lbl">Score</span>'
-    +'<span class="lb-pct hdr-lbl">%</span>'
+    +'<span class="lb-score hdr-lbl">Punten</span>'
     +'<span class="lb-time hdr-lbl">Tijd</span>'
     +'</div>';
 
@@ -209,8 +207,7 @@ function renderLeaderboard(records){
       +'<span class="lb-rank">'+rank+'</span>'
       +'<span class="lb-medal">'+medal+'</span>'
       +'<span class="lb-name">'+escHtml(r.name)+'</span>'
-      +'<span class="lb-score">'+r.score+' / '+r.total+'</span>'
-      +'<span class="lb-pct">'+pct+'%</span>'
+      +'<span class="lb-score">'+r.score.toFixed(1)+'</span>'
       +'<span class="lb-time">'+formatTime(r.time)+'</span>'
       +'</div>';
   });
