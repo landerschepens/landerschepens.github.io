@@ -95,6 +95,30 @@
 
   footer{text-align:center;padding:1.5rem 2rem;border-top:1px solid var(--border);color:var(--dim);font-size:.75rem;letter-spacing:.05em}
 
+
+  /* LOCKED */
+  #screen-locked{text-align:center}
+  .lock-icon{font-size:3rem;margin-bottom:1.2rem;opacity:.6}
+  .lock-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,4rem);letter-spacing:.06em;margin-bottom:.5rem}
+  .lock-sub{font-size:.9rem;color:var(--muted);font-weight:300;margin-bottom:2.5rem}
+  .cd-label{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:1rem}
+  .countdown{display:flex;gap:1rem;align-items:flex-end;justify-content:center}
+  .cd-unit{display:flex;flex-direction:column;align-items:center;gap:.3rem}
+  .cd-val{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,9vw,5.5rem);line-height:1;color:var(--text);min-width:2ch;text-align:center;transition:color .25s}
+  .cd-val.tick{color:var(--gold)}
+  .cd-lbl{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+  .cd-sep{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,6vw,4rem);color:var(--border);margin-bottom:.5rem;line-height:1;user-select:none}
+  /* Already played */
+  #screen-already-played{text-align:center}
+  .ap-icon{font-size:3rem;margin-bottom:1rem}
+  .ap-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,6vw,3.5rem);letter-spacing:.06em;color:var(--gold);margin-bottom:.5rem}
+  .ap-sub{font-size:.9rem;color:var(--muted);font-weight:300;line-height:1.7}
+  /* Cheat overlay */
+  .cheat-overlay{position:fixed;inset:0;background:rgba(224,85,85,.95);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;opacity:0;pointer-events:none;transition:opacity .3s}
+  .cheat-overlay.visible{opacity:1;pointer-events:all}
+  .cheat-icon{font-size:4rem;margin-bottom:1rem}
+  .cheat-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,8vw,5rem);letter-spacing:.06em;color:#fff;margin-bottom:.5rem}
+  .cheat-sub{font-size:1rem;color:rgba(255,255,255,.8);font-weight:300}
   @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
   @keyframes pop{0%,100%{transform:scale(1)}40%{transform:scale(1.3)}70%{transform:scale(.9)}}
   @keyframes spin{to{transform:rotate(360deg)}}
@@ -149,6 +173,38 @@
     <div class="options-grid" id="options-grid"></div>
   </div>
 
+
+  <!-- LOCKED -->
+  <div class="screen" id="screen-locked">
+    <div class="lock-icon">🔒</div>
+    <div class="lock-title">Quiz vergrendeld</div>
+    <div class="lock-sub">De quiz opent op 1 mei 2026 om 18:00</div>
+    <div class="cd-label">Opent over</div>
+    <div class="countdown">
+      <div class="cd-unit"><div class="cd-val" id="cd-d">--</div><div class="cd-lbl">Dagen</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><div class="cd-val" id="cd-h">--</div><div class="cd-lbl">Uren</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><div class="cd-val" id="cd-m">--</div><div class="cd-lbl">Min</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><div class="cd-val" id="cd-s">--</div><div class="cd-lbl">Sec</div></div>
+    </div>
+  </div>
+
+  <!-- ALREADY PLAYED -->
+  <div class="screen" id="screen-already-played">
+    <div class="ap-icon">🚫</div>
+    <div class="ap-title">Al gespeeld!</div>
+    <div class="ap-sub">Je hebt de quiz al ingevuld, <strong style="color:var(--text)" id="ap-name"></strong>.<br>Iedereen speelt de quiz slechts 1 keer.</div>
+  </div>
+
+  <!-- CHEAT OVERLAY -->
+  <div class="cheat-overlay" id="cheat-overlay">
+    <div class="cheat-icon">🚪</div>
+    <div class="cheat-title">Weg geweest!</div>
+    <div class="cheat-sub">Je verliet de pagina — vraag overgeslagen.<br>Keren gedaan: <strong id="cheat-count">1</strong></div>
+  </div>
+
   <!-- SUBMITTING -->
   <div class="screen" id="screen-submitting">
     <div class="submit-spinner"></div>
@@ -182,23 +238,56 @@
   var _i="U3BhbmplIiwgIkJyYXppbGllIiwgIlBvcnR1Z2FsIiwgIkFyZ2VudGluaWUiXSwgImEiOiAyfSwgeyJ0aGVtZSI6ICJDUjciLCAicSI6ICJXYXQgc3RhYXQgJ0NSNycgdm9vcj8iLCAibyI6IFsiQ3Jpc3RpYW5vIFJvbmFsZG8sIHJ1Z251bW1lciA3IiwgIkNsdWIgUmVjb3JkIDcgZG9lbHB1bnRlbiIsICJDaGFtcGlvbiBSb25hbGRvIFNlaXpvZW4gNyIsICJDYXJlZXIgUm91bmQgNyJdLCAiYSI6IDB9LCB7InRoZW1lIjogIkJyZWFraW5nIEJhZCIsICJxIjogIldhdCBpcyBkZSBhbGlhcyB2YW4gV2FsdGVyIFdoaXRlIGluIEJyZWFraW5nIEJhZD8iLCAibyI6IFsiVGhlIENvb2siLCAiSGVpc2VuYmVyZyIsICJXaGl0ZSBTaGFkb3ciLCAiTXIuIEJsdWUiXSwgImEiOiAxfSwgeyJ0aGVtZSI6ICJCcmVha2luZyBCYWQiLCAicSI6ICJXZWxrIGRydWcgcHJvZHVjZXJlbiBXYWx0ZXIgV2hpdGUgZW4gSmVzc2UgUGlua21hbj8iLCAibyI6IFsiQ29jYcOvbmUiLCAiSGVyb8OvbmUiLCAiTWV0aGFtZmV0YW1pbmUiLCAiRmVudGFueWwiXSwgImEiOiAyfSwgeyJ0aGVtZSI6ICJMZWdlbmQiLCAicSI6ICJXZWxrZSBhY3RldXIgc3BlZWx0IGJlaWRlIEtyYXktdHdlZWxpbmcgaW4gTGVnZW5kPyIsICJvIjogWyJUb20gSGFyZHkiLCAiVG9tIEhhbmtzIiwgIkdhcnkgT2xkbWFuIiwgIklkcmlzIEVsYmEiXSwgImEiOiAwfSwgeyJ0aGVtZSI6ICJPdmVybWVyZSIsICJxIjogIkhvZSBkaWVwIGlzIGhldCBkaWVwc3RlIHB1bnQgdmFuIGRlIE5pZXV3ZG9uaz8iLCAibyI6";
   var _j="IFsiMTIgbWV0ZXIiLCAiMTggbWV0ZXIiLCAiMjQgbWV0ZXIiLCAiMzAgbWV0ZXIiXSwgImEiOiAyfSwgeyJ0aGVtZSI6ICJPdmVybWVyZSIsICJxIjogIldhdCBpcyBkZSBsb2thbGUgZGVsaWNhdGVzc2UgdmFuIGRlIERvbmtzdHJlZWs/IiwgIm8iOiBbIkdlcm9va3RlIHphbG0iLCAiUGFsaW5nIGluICd0IGdyb2VuIiwgIk1vc3NlbGVuIG1ldCBmcmlldCIsICJLYXJwZXIgb3AgemlqbiBHZW50cyJdLCAiYSI6IDF9LCB7InRoZW1lIjogIk92ZXJtZXJlIiwgInEiOiAiV2F0IGdyZW5zdCB2bGFrIGFhbiBkZSBEb25rIGVuIGlzIGdyb25kZ2ViaWVkIHZhbiBCZXJsYXJlPyIsICJvIjogWyJEZSBXYXRlcmluZyIsICJIZXQgS2xvb3N0ZXJib3MiLCAiRGUgR3JhdGllYm9zc2VuIiwgIkhldCBNZWVyc2VuYm9zIl0sICJhIjogMn0sIHsidGhlbWUiOiAiT3Zlcm1lcmUiLCAicSI6ICJIb2UgaXMgaGV0IERvbmttZWVyIG9vcnNwcm9ua2VsaWprIG9udHN0YWFuPyIsICJvIjogWyJEb29yIGVlbiBkaWprYnJldWsiLCAiRG9vciB0dXJmd2lubmluZyIsICJEb29yIGVlbiBtZXRlb3JpZXQiLCAiRG9vciB6YW5kd2lubmluZyJdLCAiYSI6IDF9LCB7InRoZW1lIjogIk92ZXJtZXJlIiwgInEiOiAiSG9ldmVlbCBXYXR0IG1vZXN0IGlrIGdlZHVyZW5kZSAxIG1pbnV1dCB0cmFwcGVuIG9tIEtPTSB0ZSB3b3JkZW4gb3AgaGV0IGdyYXZlbHBhYWRqZSBuYWFyIGRlIE5pZXV3ZG9uaz8iLCAibyI6IFsiMzI0VyIsICIzOThXIiwgIjQ2MlciLCAiNTEwVyJdLCAiYSI6IDJ9XQ==";
 
-  // Airtable config
+  // ── Config ──
   var AT_BASE='appcZ6eL9mrvzI7d1';
   var AT_TABLE='tbl3MM97n3v5Fithf';
   var AT_TOKEN='patHtVCKSUefoV18U.305cca252c0d4874fb7fa65f23aaf24f0de5e31b3085caefdbe0d39b4a4c5ef8';
-
+  var OPEN_DATE=new Date('2026-05-01T18:00:00'); // Belgium local time
   var TIMER_SEC=30, CIRC=175.9, LTRS=['A','B','C','D'];
   var PLAYERS=["Lander","Ben","Tim","Celestine","Vic","Sam","Maure","Stef","Joodert","Ashley",
     "Brecht","Dauwe","Femke","Florian","Floris","Lauren","Senne","Laurens","Lucas",
-    "Dominique","Sven","Anse","Laurence"];
+    "Dominique","Sven","Anse","Schele-Nele"];
 
-  var questions=[], current=0, answers=[], timerIv=null, nickname='';
+  var questions=[], current=0, answers=[], timerIv=null, nickname='', playerRecordId=null;
+  var cheatCount=0, cheatWarned=false;
 
   function $(i){return document.getElementById(i)}
   function decode(){try{return JSON.parse(atob(_a+_b+_c+_d+_e+_f+_g+_h+_i+_j))}catch(e){return[]}}
   function show(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active')});var el=$(id);el.classList.add('active');void el.offsetWidth}
+  function pad(n){return String(Math.floor(n)).padStart(2,'0')}
 
-  // Build player grid
+  // ── Countdown ──
+  var cdIds=['cd-d','cd-h','cd-m','cd-s'];
+  function tickCountdown(){
+    var diff=OPEN_DATE-new Date();
+    if(diff<=0){boot();return;}
+    var vals=[Math.floor(diff/86400000),Math.floor((diff%86400000)/3600000),Math.floor((diff%3600000)/60000),Math.floor((diff%60000)/1000)];
+    vals.forEach(function(v,i){
+      var el=$(cdIds[i]); if(!el)return;
+      var s=pad(v);
+      if(el.textContent!==s){el.textContent=s;el.classList.add('tick');setTimeout(function(){el.classList.remove('tick')},280);}
+    });
+  }
+
+  // ── Boot: check date first ──
+  function boot(){
+    show('screen-nick');
+  }
+
+  function checkDateThenBoot(){
+    if(new Date()<OPEN_DATE){
+      show('screen-locked');
+      tickCountdown();
+      var iv=setInterval(function(){
+        if(new Date()>=OPEN_DATE){clearInterval(iv);boot();}
+        else tickCountdown();
+      },1000);
+    } else {
+      boot();
+    }
+  }
+
+  // ── Build player grid ──
   var nickGrid=$('nick-grid'), bg=$('btn-go');
   PLAYERS.forEach(function(name){
     var btn=document.createElement('button');
@@ -213,17 +302,82 @@
     nickGrid.appendChild(btn);
   });
 
-  bg.addEventListener('click',function(){if(nickname)startQuiz()});
+  bg.addEventListener('click',function(){if(nickname)checkAndStart()});
 
-  function startQuiz(){
-    questions=decode();
-    if(!questions.length){alert('Error loading questions.');return;}
-    current=0;answers=[];
-    show('screen-quiz');
-    renderQ();
+  // ── Check Airtable HasPlayed before starting ──
+  function checkAndStart(){
+    bg.disabled=true;
+    bg.textContent='EVEN CHECKEN...';
+    fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_TABLE
+      +'?filterByFormula='+encodeURIComponent('{Name}="'+nickname+'"')+'&maxRecords=1',
+      {headers:{'Authorization':'Bearer '+AT_TOKEN}})
+    .then(function(r){return r.json()})
+    .then(function(data){
+      var recs=data.records||[];
+      if(recs.length>0){
+        playerRecordId=recs[0].id;
+        if(recs[0].fields.HasPlayed){
+          // Already played
+          var apn=$('ap-name');if(apn)apn.textContent=nickname;
+          show('screen-already-played');
+          return;
+        }
+      }
+      // Good to go
+      bg.disabled=false; bg.textContent='START →';
+      questions=decode();
+      if(!questions.length){alert('Error loading questions.');return;}
+      current=0;answers=[];cheatCount=0;cheatWarned=false;
+      show('screen-quiz');
+      startAntiCheat();
+      renderQ();
+    })
+    .catch(function(){
+      // If check fails, allow playing anyway
+      bg.disabled=false; bg.textContent='START →';
+      questions=decode();
+      if(!questions.length) return;
+      current=0;answers=[];cheatCount=0;cheatWarned=false;
+      show('screen-quiz');
+      startAntiCheat();
+      renderQ();
+    });
   }
 
-  // Timer
+  // ── Anti-cheat: page visibility ──
+  function startAntiCheat(){
+    document.addEventListener('visibilitychange', onVisChange);
+  }
+  function stopAntiCheat(){
+    document.removeEventListener('visibilitychange', onVisChange);
+  }
+  function onVisChange(){
+    if(document.hidden && questions.length && current < questions.length){
+      cheatCount++;
+      // Auto-skip current question as penalty
+      stopTimer();
+      var q=questions[current];
+      var btns=$('options-grid').querySelectorAll('.opt-btn');
+      btns.forEach(function(b){b.disabled=true});
+      if(btns[q.a]) btns[q.a].classList.add('correct');
+      answers.push({correct:false, chosen:-1, cheat:true});
+      // Show warning overlay
+      showCheatWarning();
+    }
+  }
+  function showCheatWarning(){
+    var overlay=$('cheat-overlay');
+    $('cheat-count').textContent=cheatCount;
+    overlay.classList.add('visible');
+    setTimeout(function(){
+      overlay.classList.remove('visible');
+      current++;
+      if(current<questions.length)renderQ();
+      else submitResult();
+    }, 2500);
+  }
+
+  // ── Question timer ──
   var timeLeft=TIMER_SEC;
   function startTimer(){
     clearInterval(timerIv);timeLeft=TIMER_SEC;updateTimerUI();
@@ -273,20 +427,36 @@
     setTimeout(function(){current++;if(current<questions.length)renderQ();else submitResult();},900);
   }
 
-  // Submit to Airtable — 0.5 pts per correct answer
+  // ── Submit: set HasPlayed + score ──
   function submitResult(){
     stopTimer();
+    stopAntiCheat();
     var correct=answers.filter(function(a){return a.correct}).length;
     var total=questions.length;
     var pts=correct*0.5;
     show('screen-submitting');
-    fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_TABLE,{
-      method:'POST',
-      headers:{'Authorization':'Bearer '+AT_TOKEN,'Content-Type':'application/json'},
-      body:JSON.stringify({fields:{Name:nickname,Quiz:pts,Timestamp:new Date().toISOString()}})
-    })
-    .then(function(){showResult(correct,total,pts)})
-    .catch(function(){showResult(correct,total,pts)});
+
+    var fields={HasPlayed:true, Quiz:pts, Timestamp:new Date().toISOString()};
+    if(playerRecordId){
+      // PATCH existing record
+      fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_TABLE+'/'+playerRecordId,{
+        method:'PATCH',
+        headers:{'Authorization':'Bearer '+AT_TOKEN,'Content-Type':'application/json'},
+        body:JSON.stringify({fields:fields})
+      })
+      .then(function(){showResult(correct,total,pts)})
+      .catch(function(){showResult(correct,total,pts)});
+    } else {
+      // POST new record
+      fields.Name=nickname;
+      fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_TABLE,{
+        method:'POST',
+        headers:{'Authorization':'Bearer '+AT_TOKEN,'Content-Type':'application/json'},
+        body:JSON.stringify({fields:fields})
+      })
+      .then(function(){showResult(correct,total,pts)})
+      .catch(function(){showResult(correct,total,pts)});
+    }
   }
 
   function showResult(correct,total,pts){
@@ -300,6 +470,7 @@
     $('result-title').textContent=title;
     $('result-score').textContent='Je had '+correct+' / '+total+' correct — +'+pts.toFixed(1)+' punten!';
     $('result-name').textContent='Gespeeld door: '+nickname;
+    if(cheatCount>0) $('result-score').textContent+=' ('+cheatCount+'x tab gewisseld — vragen overgeslagen)';
     $('result-msg').textContent=msg;
     $('result-msg').className='result-msg '+msgClass;
     var bd=$('result-breakdown');bd.innerHTML='';
@@ -308,14 +479,15 @@
       var num=document.createElement('span');num.className='rb-num';num.textContent=i+1;
       var th=document.createElement('span');th.className='rb-theme';th.textContent=q.theme;
       var qq=document.createElement('span');qq.className='rb-q';qq.textContent=q.q;
-      var ic=document.createElement('span');ic.className='rb-icon';ic.textContent=answers[i].correct?'✅':'❌';
+      var cheated=answers[i]&&answers[i].cheat;
+      var ic=document.createElement('span');ic.className='rb-icon';ic.textContent=answers[i]&&answers[i].correct?'✅':(cheated?'🚪':'❌');
       row.appendChild(num);row.appendChild(th);row.appendChild(qq);row.appendChild(ic);
       bd.appendChild(row);
     });
     show('screen-result');
   }
 
-  show('screen-nick');
+  checkDateThenBoot();
 })();
 </script>
 </body>
