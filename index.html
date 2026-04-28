@@ -1,17 +1,420 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>www.kaasje.be</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="KAASJE.png" sizes="16x16" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,300&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toernooi Schema</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg: #0f0f0f;
+    --surface: #181818;
+    --card: #1e1e1e;
+    --border: #2a2a2a;
+    --darts: #e8c547;
+    --biljart: #4fa8e8;
+    --out: #444;
+    --text: #f0f0f0;
+    --muted: #888;
+    --accent: #e8c547;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    padding: 2rem 1rem;
+    min-height: 100vh;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2rem;
+  }
+
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  header p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .meta-bar {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .dot-d { background: var(--darts); }
+  .dot-b { background: var(--biljart); }
+
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .legend-badge {
+    padding: 2px 10px;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+
+  .badge-d { background: var(--darts); color: #000; }
+  .badge-b { background: var(--biljart); color: #000; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .round-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .round-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 1.2rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .round-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: var(--accent);
+    line-height: 1;
+    min-width: 36px;
+  }
+
+  .round-time {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .round-body {
+    padding: 1rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .match-row {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .match-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 3px;
+    min-width: 70px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .label-d { background: var(--darts); color: #000; }
+  .label-b { background: var(--biljart); color: #000; }
+
+  .match-players {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .vs {
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-weight: 400;
+    margin: 0 2px;
+  }
+
+  .sitting-out {
+    margin-top: 0.6rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .sitting-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--out);
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+  }
+
+  .sitting-names {
+    font-size: 0.75rem;
+    color: var(--out);
+    line-height: 1.5;
+  }
+
+  .stats-section {
+    max-width: 1400px;
+    margin: 3rem auto 0;
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+  }
+
+  .stats-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.6rem;
+  }
+
+  .stat-row {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.6rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .stat-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .stat-counts {
+    display: flex;
+    gap: 0.4rem;
+    flex-shrink: 0;
+  }
+
+  .stat-pill {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 99px;
+  }
+
+  .pill-d { background: var(--darts); color: #000; }
+  .pill-b { background: var(--biljart); color: #000; }
+
+  footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    color: var(--out);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+  }
+
+  @media print {
+    body { background: white; color: black; padding: 1rem; }
+    :root {
+      --bg: white; --surface: #f5f5f5; --card: #f9f9f9;
+      --border: #ddd; --text: #111; --muted: #555; --out: #999;
+      --darts: #c9a200; --biljart: #1a6ab3;
+    }
+    .grid { grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+    .round-card { break-inside: avoid; }
+  }
+</style>
 </head>
 <body>
- <p class="kaasje"><b>www.kaasje.be</b></p>   
- <img src="logo.png" alt="bruhbruhush" class="HoGentIMG">
- <p class="kaasje2">Alle informatie over HoGent vind je <a href="https://www.hogent.be">HIER</a></p>
- <p class="kaasje3">Is gewoon kaasje</p>
+
+<header>
+  <h1>Toernooi Schema</h1>
+  <p>23 spelers &nbsp;·&nbsp; 3 dartsborden &nbsp;·&nbsp; 2 biljartafels &nbsp;·&nbsp; 6 minuten per ronde</p>
+  <div class="meta-bar">
+    <div class="meta-item"><span class="dot dot-d"></span> 5 dartsspellen per speler</div>
+    <div class="meta-item"><span class="dot dot-b"></span> 4 biljartspellen per speler</div>
+    <div class="meta-item">⏱ 24 rondes &nbsp;≈&nbsp; 2u 24min</div>
+  </div>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><span class="legend-badge badge-d">DARTS</span> Dartsbord (1 vs 1)</div>
+  <div class="legend-item"><span class="legend-badge badge-b">BILJART</span> Biljart (1 vs 1)</div>
+</div>
+
+<div class="grid" id="schedule"></div>
+
+<div class="stats-section">
+  <div class="stats-title">Speler Overzicht</div>
+  <div class="stats-grid" id="stats"></div>
+</div>
+
+<footer>Elke ronde duurt 6 minuten &nbsp;·&nbsp; 5 darts &amp; 4 biljart per speler &nbsp;·&nbsp; Max 1 herhaald duel</footer>
+
+<script>
+const schedule = [
+  { darts: [["Anse","Brecht"],["Vic","Lucas"],["Femke","Lauren"]], biljart: [["Senne","Ben"],["Stef","Floris"]] },
+  { darts: [["Joodert","Laurens"],["Floris","Anse"],["Sven","Maure"]], biljart: [["Brecht","Senne"],["Lucas","Femke"]] },
+  { darts: [["Celestine","Joodert"],["Dominique","Ashley"],["Schele-Nele","Floris"]], biljart: [["Sven","Laurens"],["Dauwe","Anse"]] },
+  { darts: [["Ben","Stef"],["Florian","Floris"],["Senne","Lauren"]], biljart: [["Joodert","Schele-Nele"],["Lander","Celestine"]] },
+  { darts: [["Sam","Stef"],["Tim","Brecht"],["Lander","Dominique"]], biljart: [["Florian","Sven"],["Ashley","Schele-Nele"]] },
+  { darts: [["Dauwe","Celestine"],["Senne","Sven"],["Ashley","Joodert"]], biljart: [["Vic","Ben"],["Sam","Lucas"]] },
+  { darts: [["Schele-Nele","Florian"],["Sam","Floris"],["Vic","Dominique"]], biljart: [["Maure","Lauren"],["Tim","Joodert"]] },
+  { darts: [["Femke","Tim"],["Maure","Stef"],["Ben","Schele-Nele"]], biljart: [["Dominique","Lauren"],["Floris","Lucas"]] },
+  { darts: [["Laurens","Maure"],["Lander","Stef"],["Lucas","Anse"]], biljart: [["Florian","Ben"],["Sam","Schele-Nele"]] },
+  { darts: [["Dauwe","Maure"],["Sven","Ben"],["Femke","Celestine"]], biljart: [["Ashley","Tim"],["Vic","Anse"]] },
+  { darts: [["Lander","Maure"],["Ashley","Senne"],["Tim","Schele-Nele"]], biljart: [["Femke","Sam"],["Celestine","Stef"]] },
+  { darts: [["Laurens","Ben"],["Florian","Dauwe"],["Sam","Brecht"]], biljart: [["Maure","Dominique"],["Lander","Sven"]] },
+  { darts: [["Lucas","Joodert"],["Vic","Floris"],["Lauren","Anse"]], biljart: [["Dauwe","Laurens"],["Brecht","Schele-Nele"]] },
+  { darts: [["Vic","Schele-Nele"],["Laurens","Stef"],["Florian","Femke"]], biljart: [["Senne","Sam"],["Ashley","Lauren"]] },
+  { darts: [["Dominique","Sven"],["Tim","Laurens"],["Celestine","Vic"]], biljart: [["Brecht","Joodert"],["Stef","Schele-Nele"]] },
+  { darts: [["Senne","Dominique"],["Ashley","Celestine"],["Sam","Joodert"]], biljart: [["Laurens","Femke"],["Florian","Lauren"]] },
+  { darts: [["Lander","Floris"],["Lauren","Brecht"],["Lucas","Ben"]], biljart: [["Maure","Celestine"],["Anse","Laurens"]] },
+  { darts: [["Dauwe","Vic"],["Ashley","Maure"],["Femke","Senne"]], biljart: [["Floris","Sven"],["Tim","Ben"]] },
+  { darts: [["Florian","Stef"],["Sven","Femke"],["Sam","Lander"]], biljart: [["Vic","Maure"],["Dominique","Dauwe"]] },
+  { darts: [["Anse","Ashley"],["Lucas","Dominique"],["Lauren","Sven"]], biljart: [["Lander","Dauwe"],["Tim","Stef"]] },
+  { darts: [["Tim","Lauren"],["Dauwe","Brecht"]], biljart: [["Joodert","Lander"],["Florian","Anse"]] },
+  { darts: [], biljart: [["Femke","Ashley"],["Brecht","Lucas"]] },
+  { darts: [], biljart: [["Vic","Joodert"],["Floris","Lauren"]] },
+  { darts: [], biljart: [["Celestine","Dominique"],["Senne","Tim"]] },
+];
+
+const allPlayers = ["Lander","Ben","Tim","Celestine","Vic","Sam","Maure","Stef","Joodert","Ashley",
+  "Brecht","Dauwe","Femke","Florian","Floris","Lauren","Senne","Laurens","Lucas",
+  "Dominique","Sven","Anse","Schele-Nele"];
+
+// Track counts
+const dc = {}, bc = {};
+allPlayers.forEach(p => { dc[p] = 0; bc[p] = 0; });
+
+// Compute minutes
+function roundTime(i) {
+  const total = i * 6;
+  const h = Math.floor(total / 60);
+  const m = total % 60;
+  return h > 0 ? `${h}u${m.toString().padStart(2,'0')}` : `${m} min`;
+}
+
+const grid = document.getElementById('schedule');
+
+schedule.forEach((rnd, i) => {
+  const playing = new Set();
+  rnd.darts.forEach(([a,b]) => { playing.add(a); playing.add(b); dc[a]++; dc[b]++; });
+  rnd.biljart.forEach(([a,b]) => { playing.add(a); playing.add(b); bc[a]++; bc[b]++; });
+  const sitting = allPlayers.filter(p => !playing.has(p));
+
+  const card = document.createElement('div');
+  card.className = 'round-card';
+
+  let matchRows = '';
+  rnd.darts.forEach(([a,b], j) => {
+    matchRows += `<div class="match-row">
+      <span class="match-label label-d">Darts ${j+1}</span>
+      <span class="match-players">${a} <span class="vs">vs</span> ${b}</span>
+    </div>`;
+  });
+  rnd.biljart.forEach(([a,b], j) => {
+    matchRows += `<div class="match-row">
+      <span class="match-label label-b">Biljart ${j+1}</span>
+      <span class="match-players">${a} <span class="vs">vs</span> ${b}</span>
+    </div>`;
+  });
+
+  const sittingHtml = sitting.length > 0 ? `
+    <div class="sitting-out">
+      <div class="sitting-label">Wacht</div>
+      <div class="sitting-names">${sitting.join(' · ')}</div>
+    </div>` : '';
+
+  card.innerHTML = `
+    <div class="round-header">
+      <div class="round-num">${i+1}</div>
+      <div>
+        <div style="font-size:0.8rem;font-weight:600;">Ronde ${i+1}</div>
+        <div class="round-time">+${roundTime(i)}</div>
+      </div>
+    </div>
+    <div class="round-body">
+      ${matchRows}
+      ${sittingHtml}
+    </div>`;
+  grid.appendChild(card);
+});
+
+// Stats
+const statsGrid = document.getElementById('stats');
+allPlayers.forEach(p => {
+  const row = document.createElement('div');
+  row.className = 'stat-row';
+  row.innerHTML = `
+    <span class="stat-name">${p}</span>
+    <div class="stat-counts">
+      <span class="stat-pill pill-d">D ${dc[p]}</span>
+      <span class="stat-pill pill-b">B ${bc[p]}</span>
+    </div>`;
+  statsGrid.appendChild(row);
+});
+</script>
 </body>
 </html>
