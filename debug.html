@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Airtable Debug</title>
+<style>
+  body{background:#0f0f0f;color:#f0f0f0;font-family:monospace;padding:2rem;max-width:800px;margin:0 auto}
+  h2{color:#e8c547;margin-bottom:1rem}
+  button{background:#e8c547;color:#000;border:none;padding:.6rem 1.4rem;font-weight:700;cursor:pointer;border-radius:4px;margin:.4rem .4rem .4rem 0;font-size:.9rem}
+  button:hover{opacity:.85}
+  pre{background:#1e1e1e;border:1px solid #2a2a2a;border-radius:6px;padding:1rem;overflow-x:auto;white-space:pre-wrap;word-break:break-all;font-size:.8rem;line-height:1.5;margin-top:1rem}
+  .ok{color:#4caf76} .err{color:#e05555} .warn{color:#e8c547}
+  input{background:#1e1e1e;border:1px solid #2a2a2a;color:#f0f0f0;padding:.5rem .8rem;border-radius:4px;font-family:monospace;width:100%;margin:.3rem 0 .8rem;font-size:.85rem}
+  label{font-size:.75rem;color:#888;letter-spacing:.06em;text-transform:uppercase}
+  .section{margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid #2a2a2a}
+</style>
+</head>
+<body>
+<h2>🔧 Airtable Debug Tool</h2>
+
+<div class="section">
+  <label>Base ID</label>
+  <input id="base" value="appcZ6eL9mrvzI7d1"/>
+  <label>API Token</label>
+  <input id="token" value="patHtVCKSUefoV18U.305cca252c0d4874fb7fa65f23aaf24f0de5e31b3085caefdbe0d39b4a4c5ef8"/>
+  <label>Table Name (exact, case-sensitive)</label>
+  <input id="table" value="Table 1"/>
+</div>
+
+<button onclick="listTables()">1. List all tables in base</button>
+<button onclick="readRecords()">2. Read records from table</button>
+<button onclick="testWrite()">3. Write test record</button>
+<button onclick="clearLog()">Clear log</button>
+
+<pre id="log">Click a button to start debugging...</pre>
+
+<script>
+function log(msg, cls){
+  var pre=document.getElementById('log');
+  var line=document.createElement('div');
+  if(cls) line.className=cls;
+  line.textContent=msg;
+  pre.appendChild(line);
+  pre.scrollTop=pre.scrollHeight;
+}
+function clearLog(){document.getElementById('log').innerHTML=''}
+function base(){return document.getElementById('base').value.trim()}
+function token(){return document.getElementById('token').value.trim()}
+function table(){return document.getElementById('table').value.trim()}
+
+async function req(url, opts){
+  log('→ '+url);
+  log('  Token: Bearer '+token().slice(0,18)+'...');
+  var fetchOpts = Object.assign({
+    method: opts && opts.method ? opts.method : 'GET',
+    headers:{
+      'Authorization':'Bearer '+token(),
+      'Content-Type':'application/json'
+    },
+    mode: 'cors'
+  }, opts);
+  log('  Method: '+fetchOpts.method);
+  if(fetchOpts.body) log('  Body: '+fetchOpts.body);
+  try{
+    var r=await fetch(url, fetchOpts);
+    var body=await r.text();
+    log('← HTTP '+r.status+' '+r.statusText, r.ok?'ok':'err');
+    log('  Headers:');
+    r.headers.forEach(function(v,k){ log('    '+k+': '+v); });
+    try{
+      var j=JSON.parse(body);
+      log(JSON.stringify(j,null,2));
+      return j;
+    }catch(e){
+      log('  Raw body: '+body);
+      return null;
+    }
+  }catch(e){
+    log('FETCH ERROR TYPE: '+e.constructor.name,'err');
+    log('FETCH ERROR MSG:  '+e.message,'err');
+    log('FETCH ERROR FULL: '+String(e),'err');
+    // Try a no-cors probe to see if server is reachable at all
+    log('\nProbing reachability (no-cors)...','warn');
+    try{
+      await fetch(url, {method:'HEAD', mode:'no-cors'});
+      log('Server is reachable (no-cors HEAD succeeded) — likely a CORS policy block on the token/endpoint','warn');
+    }catch(e2){
+      log('Server unreachable even with no-cors: '+e2.message,'err');
+      log('Possible causes: no internet, DNS failure, or network firewall','err');
+    }
+    return null;
+  }
+}
+
+async function listTables(){
+  clearLog();
+  log('=== Listing tables in base ===','warn');
+  var data=await req('https://api.airtable.com/v0/meta/bases/'+base()+'/tables');
+  if(data && data.tables){
+    log('\n✅ Tables found:','ok');
+    data.tables.forEach(function(t){
+      log('  · "'+t.name+'" (id: '+t.id+')','ok');
+      if(t.fields){
+        t.fields.forEach(function(f){
+          log('      field: "'+f.name+'" ('+f.type+')');
+        });
+      }
+    });
+  }
+}
+
+async function readRecords(){
+  clearLog();
+  log('=== Reading records from "'+table()+'" ===','warn');
+  var data=await req('https://api.airtable.com/v0/'+base()+'/'+encodeURIComponent(table())+'?maxRecords=10');
+  if(data && data.records){
+    log('\n✅ '+data.records.length+' record(s) found','ok');
+    data.records.forEach(function(r,i){
+      log('  ['+i+'] '+JSON.stringify(r.fields));
+    });
+  }
+}
+
+async function testWrite(){
+  clearLog();
+  log('=== Writing test record to "'+table()+'" ===','warn');
+  var data=await req('https://api.airtable.com/v0/'+base()+'/'+encodeURIComponent(table()),{
+    method:'POST',
+    body:JSON.stringify({fields:{Name:'TEST_USER',Score:42,Total:43,Timestamp:new Date().toISOString()}})
+  });
+  if(data && data.id){
+    log('\n✅ Record created! ID: '+data.id,'ok');
+    log('Fields: '+JSON.stringify(data.fields));
+  }
+}
+</script>
+</body>
+</html>
