@@ -281,7 +281,7 @@
     fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_TABLE,{
       method:'POST',
       headers:{'Authorization':'Bearer '+AT_TOKEN,'Content-Type':'application/json'},
-      body:JSON.stringify({fields:{Name:nickname,Score:pts,Timestamp:new Date().toISOString()}})
+      body:JSON.stringify({fields:{Name:nickname,Quiz:pts,Timestamp:new Date().toISOString()}})
     })
     .then(function(){showResult(correct,total,pts)})
     .catch(function(){showResult(correct,total,pts)});
